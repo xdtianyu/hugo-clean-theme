@@ -2,15 +2,20 @@
 
 <main role="main">
     <div class="container mt-3">
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h5>
-                <p class="card-text">
-                    {{ .Date.Format "Mon, 02 Jan 2006 15:04:05 MST" }}
-                    {{ .Content }}
-                </p>
+        <article class="markdown-body card">
+            <h1><a href="{{ .Permalink }}" class="text-dark"i title="{{ .Title }}">{{ .Title }}</a></h1>
+            <div class="row ml-0">
+                <p class="text-secondary mr-2 mb-2">发布于：{{ partial "date.html" . }}</p>
+                {{ partial "categories.html" . }}
+                {{ partial "tags.html" . }}
             </div>
-        </div>
+            <div class="mb-3 d-md-none"></div>
+            {{ partial "toc.html" . }}
+            {{- with .Content -}}
+            {{ partial "anchor.html" . }}
+            {{- end -}}
+        </article>
+        {{ partial "isso.html" . }}
     </div>
 </main>
 

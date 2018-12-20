@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html>
-<body>
-  {{ range .Data.Pages }}
-    <h1><a href={{ .Permalink }}>{{ .Title }}</a></h1>
-  {{ end }}
-</body>
-</html>
+{{ partial "header.html" . }}
+<main role="main">
+    <div class="container mt-3">
+        {{ range .Data.Pages }}
+        {{ if eq .Type "post"}}
+        {{ partial "post_item.html" . }}
+        {{ end }}
+        {{ end }}
+    </div>
+</main>
+
+{{ partial "footer.html" . }}

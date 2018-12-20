@@ -1,0 +1,47 @@
+<nav aria-label="Page navigation">
+    {{ $pag := $.Paginator }}
+    {{ if gt $pag.TotalPages 1 }}
+    <ul class="pagination justify-content-center">
+        {{ with $pag.First }}
+        <li class="page-item">
+            <a class="page-link" href="{{ .URL }}" aria-label="First"><span aria-hidden="true">首页</span></a>
+        </li>
+        {{ end }}
+        <li {{ if not $pag.HasPrev }} class="disabled page-item" {{ else }} class="page-item" {{ end }}>
+            <a class="page-link" href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}" aria-label="Previous">
+                <span aria-hidden="true">上一页</span>
+            </a>
+        </li>
+        {{ $.Scratch.Set "__paginator.ellipsed" false }}
+        {{ range $pag.Pagers }}
+        {{ $right := sub .TotalPages .PageNumber }}
+        {{ $sn := or (le .PageNumber 3) (eq $right 0) }}
+        {{ $sn := or $sn (and (gt .PageNumber (sub $pag.PageNumber 2)) (lt .PageNumber (add $pag.PageNumber 2))) }}
+        {{ if $sn }}
+        {{ $.Scratch.Set "__paginator.ellipsed" false }}
+        {{ $.Scratch.Set "__paginator.shouldEllipse" false }}
+        {{ else }}
+        {{ $.Scratch.Set "__paginator.shouldEllipse" (not ($.Scratch.Get "__paginator.ellipsed") ) }}
+        {{ $.Scratch.Set "__paginator.ellipsed" true }}
+        {{ end }}
+        {{ if $sn }}
+        <li {{ if eq . $pag }} class="active page-item" {{ else }} class="page-item" {{ end }}>
+            <a class="page-link" href="{{ .URL }}">{{ .PageNumber }}</a>
+        </li>
+        {{ else if ($.Scratch.Get "__paginator.shouldEllipse") }}
+        <li class="disabled page-item mx-1"><span aria-hidden="true">&hellip;</span></li>
+        {{ end }}
+        {{ end }}
+        <li {{ if not $pag.HasNext }} class="disabled page-item" {{ else }} class="page-item" {{ end }}>
+            <a class="page-link" href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}" aria-label="Next">
+                <span aria-hidden="true">下一页</span>
+            </a>
+        </li>
+        {{ with $pag.Last }}
+        <li class="page-item">
+            <a class="page-link" href="{{ .URL }}" aria-label="Last"><span aria-hidden="true">尾页</span></a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+</nav>

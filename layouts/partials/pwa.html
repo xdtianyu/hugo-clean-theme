@@ -1,0 +1,35 @@
+<link rel="manifest" href="/manifest.json">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Busy.Im">
+<meta name="apple-mobile-web-app-title" content="Busy.Im">
+<meta name="theme-color" content="#f6f8fa">
+<meta name="msapplication-navbutton-color" content="#f6f8fa">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="msapplication-starturl" content="/">
+
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon_48.png">
+<link rel="apple-touch-icon" type="image/png" sizes="48x48" href="/favicon_48.png">
+<link rel="icon" type="image/png" sizes="72x72" href="/favicon_72.png">
+<link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/favicon_72.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon_96.png">
+<link rel="apple-touch-icon" type="image/png" sizes="96x96" href="/favicon_96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon_144.png">
+<link rel="apple-touch-icon" type="image/png" sizes="144x144" href="/favicon_144.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon_512.png">
+<link rel="apple-touch-icon" type="image/png" sizes="512x512" href="/favicon_512.png">
+
+<script>
+    if (navigator.serviceWorker.controller) {
+        console.log('[PWA] active service worker found, no need to register')
+    } else {
+        navigator.serviceWorker.register('/sw.js', {
+            scope: './'
+        }).then(function(reg) {
+            console.log('Service worker has been registered for scope:'+ reg.scope);
+        });
+    }
+</script>

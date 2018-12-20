@@ -1,0 +1,25 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title"><a title="{{ .Title }}" href="{{ .Permalink }}" class="text-dark font-weight-bold">{{ .Title }}</a>
+        </h5>
+        <div class="row ml-0 mb-0">
+            <p class="card-text text-secondary mr-1 mb-2">
+                {{ partial "date.html" . }}
+            </p>
+            {{ partial "categories.html" . }}
+
+            {{ range $index, $tag := .Params.tags }}
+            <a title="{{ $tag }}" class="{{ if (ge $index 1) }} d-none d-md-block {{ end }}" rel="tag"
+               href="/tags/{{ $tag | urlize }}/">
+                <span class="text-secondary m-1 px-1">
+                {{ partial "icon_tag.html" . }}{{ . }}
+                </span>
+            </a>
+            {{ end }}
+        </div>
+        <p class="card-text">
+            {{ .Description }}
+        </p>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{{ if eq (getenv "PROD_ENV") "production" }}
+<script src='/js/bundle.min.{{ print (getenv "GIT_SHA") }}.js'></script>
+{{ else }}
+<script src="/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/js/jquery.timeago.js"></script>
+<script src="/js/jquery.timeago.zh-CN.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+{{ end }}

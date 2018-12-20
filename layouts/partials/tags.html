@@ -1,0 +1,5 @@
+{{ range $name := .Params.tags }}
+<a title="{{ $name }}" href="/tags/{{ $name | urlize }}/" rel="tag"><span class="text-secondary m-1 px-1">
+<svg class="mr-1 mb-0" width="14" height="14" aria-hidden="true" role="img"><use href="#tag"/></svg>{{ $name }}</span>
+</a>
+{{ end }}

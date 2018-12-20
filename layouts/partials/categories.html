@@ -1,0 +1,4 @@
+{{ range $name := .Params.categories }}
+<a title="{{ $name }}" href="/categories/{{ $name | urlize }}/" rel="category tag"><span class="text-secondary m-1 px-1">
+    {{ partial "icon_category.html" . }}{{ $name }}</span></a>
+{{ end }}

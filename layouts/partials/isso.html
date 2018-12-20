@@ -1,0 +1,15 @@
+{{ if .Site.Params.isso }}
+<div class="comment-body mt-3">
+    <script
+            data-isso="{{ .Site.Params.isso }}"
+            src="/js/isso.embed.min.js"
+            data-isso-lang="zh"
+            data-isso-require-author="true"
+            data-isso-require-email="true"
+            data-isso-vote="true"
+            data-isso-css="true">
+    </script>
+
+    <section id="isso-thread" data-title="{{ .Title }}"></section>
+</div>
+{{ end }}

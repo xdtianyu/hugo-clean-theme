@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{ if .Description }}
+    <meta name="description" content="{{ .Description }}">
+    {{ else if $.Site.Params.description }}
+    <meta name="description" content="{{ $.Site.Params.description }}" />
+    {{ end }} {{ with $.Params.Tags }}
+    <meta name="keywords" content="{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">
+    {{ end }}
+    {{ partial "seo_schema.html" . }}
+    {{ partial "opengraph.html" . }}
+    {{ partial "pwa.html" . }}
+    <title>{{ .Title }}</title>
+
+    <link rel="canonical" href="{{ .Permalink }}"/>
+
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="100x100">
+
+    {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+    {{ if .RSSLink }}
+    <link rel="feed" type="application/rss+xml" href="{{ .RSSLink }}" title="{{ .Site.Title }}" />
+    {{ end }}
+
+    {{ if eq (getenv "PROD_ENV") "production" }}
+    <link rel="stylesheet" href='/css/bundle.min.{{ print (getenv "GIT_SHA") }}.css'>
+    {{ else }}
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/github-markdown.css">
+    {{ end }}
+
+    <style>
+
+        .bg-gray {
+            background-color: #f6f8fa;
+        }
+
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px;
+            display: block;
+        }
+
+        .comment-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+
+        @media print {
+            .markdown-body {
+                padding: 20px;
+            }
+
+            .card {
+                border: none;
+            }
+        }
+    </style>
+</head>

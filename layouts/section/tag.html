@@ -1,0 +1,32 @@
+{{ partial "header.html" . }}
+<main class="content" role="main">
+    <div class="container mt-3">
+        <div class="card mb-3">
+            <section class="m-3">
+                {{ range $taxonomy_term, $taxonomy := .Site.Taxonomies }}
+                {{ with $.Site.GetPage (printf "/%s" $taxonomy_term) }}
+                {{ if eq $taxonomy_term "categories" }}
+                <h3 class="text-dark">分类<br/></h3>
+                {{ range $key, $value := $taxonomy }}
+                <button type="button" class="btn btn-sm btn-success m-1 text-dark">
+                    <a class="text-light font-weight-bold" href="/categories/{{ $key }}">{{ $key }}<span
+                            class="ml-1 badge badge-light">{{ .Count }}</span></a>
+                </button>
+                {{ end }}
+                {{ else if eq $taxonomy_term "tags"}}
+                <h3 class="mt-3 text-dark">标签<br/></h3>
+                {{ range $key, $value := $taxonomy }}
+                <button type="button" class="btn btn-sm btn-success m-1">
+                    <a class="text-light font-weight-bold" href="/tags/{{ $key }}">{{ $key }}<span
+                            class="ml-1 badge badge-light">{{ .Count }}</span></a>
+                </button>
+                {{ end }}
+                {{ end }}
+                {{ end }}
+                {{ end }}
+            </section>
+        </div>
+    </div>
+</main>
+
+{{ partial "footer.html" . }}

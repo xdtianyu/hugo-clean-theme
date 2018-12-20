@@ -1,0 +1,12 @@
+{{ partial "header.html" . }}
+
+<main role="main">
+    <div class="container mt-3">
+        <article class="markdown-body card">
+            <h1><a href="{{ .Permalink }}" class="text-dark">{{ .Title }}</a></h1>
+            {{ .Content }}
+        </article>
+    </div>
+</main>
+
+{{ partial "footer.html" . }}

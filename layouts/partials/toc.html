@@ -1,0 +1,5 @@
+{{ if (eq .Params.toc true) }}
+<h2 id="目录">目录</h2>
+{{ .TableOfContents | replaceRE "<ul>[[:space:]]*<li>[[:space:]]*<ul>" "<ul>" | replaceRE "</ul>[[:space:]]*</li>[[:space:]]*</ul>" "</ul>" |  safeHTML }}
+<div class="mb-4"></div>
+{{ end }}
